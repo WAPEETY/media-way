@@ -1,22 +1,22 @@
-export default function Sidebar(){
+export default function sidebar(){
     return(
-        <div class="flex flex-row h-full"> 
-            <nav class="bg-white w-20  justify-between flex flex-col ml-6 rounded-xl">
-                <div class="mb-10">
-                    <div class="mt-10">
+        <div className="flex flex-row h-full"> 
+            <nav className="bg-white w-20  justify-between flex flex-col ml-6 rounded-xl">
+                <div className="mb-10">
+                    <div className="mt-10">
                         <ul>
-                            <li class="mb-6">
+                            <li className="mb-6">
                                 <a href="#">
                                     <span>
                                         <svg
-                                          class="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-green-500 "
+                                          className="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-green-500 "
                                           viewBox="0 0 24 24"
                                           fill="none"
                                           xmlns="http://www.w3.org/2000/svg"
                                         >
                                             <path
-                                              fill-rule="evenodd"
-                                              clip-rule="evenodd"
+                                              fillRule="evenodd"
+                                              clipRule="evenodd"
                                               d="M14 3V3.28988C16.8915 4.15043 19 6.82898 19 10V17H20V19H4V17H5V10C5 6.82898 7.10851 4.15043 10 3.28988V3C10 1.89543 10.8954 1 12 1C13.1046 1 14 1.89543 14 3ZM7 17H17V10C17 7.23858 14.7614 5 12 5C9.23858 5 7 7.23858 7 10V17ZM14 21V20H10V21C10 22.1046 10.8954 23 12 23C13.1046 23 14 22.1046 14 21Z"
                                               fill="currentColor"
                                             />
@@ -24,11 +24,11 @@ export default function Sidebar(){
                                     </span>
                                 </a>
                             </li>
-                            <li class="mb-6">
+                            <li className="mb-6">
                                 <a href="#">
                                     <span>
                                         <svg
-                                            class="fill-current h-5 w-5 mx-auto text-gray-900 hover:text-green-500"
+                                            className="fill-current h-5 w-5 mx-auto text-gray-900 hover:text-green-500"
                                             viewBox="0 0 512 512"
                                         >
                                             <path d="m226 232c-63.963 0-116-52.037-116-116s52.037-116 116-116 116 52.037 116 116-52.037 116-116 116z"/>
@@ -39,11 +39,11 @@ export default function Sidebar(){
                                     </span>
                                 </a>
                             </li>
-                            <li class="mb-6">
+                            <li className="mb-6">
                                 <a href="#">
                                     <span>
                                         <svg
-                                          class="fill-current h-5 w-5 text-gray-9 00 mx-auto hover:text-green-500"
+                                          className="fill-current h-5 w-5 text-gray-9 00 mx-auto hover:text-green-500"
                                           viewBox="-90 1 511 511"
                                         >
                                             
@@ -58,7 +58,7 @@ export default function Sidebar(){
                                 <a href="#">
                                     <span>
                                         <svg
-                                          class="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-green-500"
+                                          className="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-green-500"
                                           viewBox="0 0 512 512"
                                           fill="none"
                                           xmlns="http://www.w3.org/2000/svg"
@@ -67,8 +67,8 @@ export default function Sidebar(){
                                             <circle cx="386" cy="210" r="20"/>
                                             
                                             <path 
-                                            fill-rule="evenodd"
-                                            clip-rule="evenodd"
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
                                             d="M432,40h-26V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v20h-91V20c0-11.046-8.954-20-20-20
 				                            c-11.046,0-20,8.954-20,20v20h-90V20c0-11.046-8.954-20-20-20s-20,8.954-20,20v20H80C35.888,40,0,75.888,0,120v312
 				                            c0,44.112,35.888,80,80,80h153c11.046,0,20-8.954,20-20c0-11.046-8.954-20-20-20H80c-22.056,0-40-17.944-40-40V120
@@ -98,11 +98,11 @@ export default function Sidebar(){
                         </ul>
                     </div>
                 </div>
-                <div class="mb-4">
+                <div className="mb-4">
                     <a href="">
                         <span>
                             <svg
-                              class="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-red-500"
+                              className="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-red-500"
                               viewBox="0 0 24 24"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
