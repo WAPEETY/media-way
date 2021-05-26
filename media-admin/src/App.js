@@ -10,6 +10,7 @@ import{
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
+import Events_calendar from './pages/Events_calendar';
 
 function App() {
   return (
@@ -26,8 +27,11 @@ function App() {
           <users /> 
         </Route>
         <Route exact path="/event/:id">
-          pagina lista dispositivi
+          pagina lista dispositivi per ogni evento
           <event /> 
+        </Route>
+        <Route exact path="/events_calendar">
+          <Events_calendar />
         </Route>
         <Route path="*">
           <NotFound />
