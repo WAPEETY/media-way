@@ -1,16 +1,16 @@
 version: '3.4'
 
 services: 
-#    api:
-#        hostname: 'api.mediaway.com'
-#        build: './api/'
-#        links:
-#            - 'database'
-#        volumes:
-#            - './api/code:/usr/src/app:rw'
-#        networks:
-#            api_net:
-#                ipv4_address: 172.16.1.5
+    api:
+        hostname: 'api.mediaway.com'
+        build: './api/'
+        links:
+            - 'database'
+        volumes:
+            - './api/code:/usr/src/app:rw'
+        networks:
+            api_net:
+                ipv4_address: 172.16.1.5
     
 #    admin:
 #        hostname: 'admin.mediaway.com'
