@@ -1,36 +1,94 @@
-version: "3"
+version: '3.4'
 
-services:
-    apache:
-        image: webdevops/php-apache:7.0
-        ports:
-          - "4500:80"
-        volumes:
-          - ./www:/app
+services: 
+#    api:
+#        hostname: 'api.mediaway.com'
+#        build: './api/'
+#        links:
+#            - 'database'
+#        volumes:
+#            - './api/code:/usr/src/app:rw'
+#        networks:
+#            api_net:
+#                ipv4_address: 172.16.1.5
     
-    mysql:
-        image: mysql
-        command: --default-authentication-plugin=mysql_native_password
-        environment:
-            MYSQL_ROOT_HOST: '172.18.0.1'
-            MYSQL_ROOT_PASSWORD: rootPWD
-            #MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-            #MYSQL_USER: app
-            #MYSQL_USER_PASS: !finalePass
-        ports:
-            - "3306"
-        volumes:
-            - ./db:/db
+#    admin:
+#        hostname: 'admin.mediaway.com'
+#        build: './admin/'
+#        volumes:
+#            - './admin/code:/usr/src/app:ro'
+#        
+#        links:
+#            - 'api'
+#        
+#        networks:
+#            administrative_net:
+#              ipv4_address: 172.16.2.5
 
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        environment:
-            MYSQL_ROOT_PASSWORD: rootPWD
-            PMA_ARBITRARY: 1
-        ports:
-          - "8088:80"
-
-volumes:
     www:
-    db:
+        hostname: 'mediaway.com'
+        build: './www/'
+        volumes: 
+            - './www/code:/var/www/html:ro'
+        links:
+            - 'database'
+        networks:
+            www_net:
+              ipv4_address: 172.16.3.10 #192.168.1.10
+    
+    pma:
+        hostname: 'pma.mediaway.com'
+        image: phpmyadmin
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: database
+        links:
+            - 'database'
+        ports:
+            - '443:443'
+            - '80:80'
+        networks:
+            database_net:
+                ipv4_address: 172.16.4.69 #192.168.1.20
+            
+    database:
+        image: 'mysql:latest'
+        environment:
+            MYSQL_ROOT_PASSWORD: rootPWD            #change in production 
+            MYSQL_DATABASE: mediaway
+            MYSQL_USER: user                        #change in production
+            MYSQL_PASSWORD: verydifficultpassword   #change in production
+
+        volumes: 
+            - sql_database:/var/lib/mysql:rw
+        networks:
+            database_net:
+              ipv4_address: 172.16.4.20 #192.168.1.20
+
+volumes: 
+    sql_database:
+
+networks:
+    www_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.3.0/24
+                
+    api_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.1.0/24
+
+    database_net:
+        ipam:
+            driver: default
+            config: 
+                - subnet: 172.16.4.0/24
+                    
+    administrative_net:
+        ipam:
+            driver: default
+            config: 
+                - subnet: 172.16.2.0/24
