@@ -1,3 +1,3 @@
 FROM php:apache
 
-RUN docker-php-ext-install mysqli pdo
+RUN docker-php-ext-install pdo_mysql

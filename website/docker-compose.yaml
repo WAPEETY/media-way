@@ -29,12 +29,14 @@ services:
         hostname: 'mediaway.com'
         build: './www/'
         volumes: 
-            - './www/code:/var/www/html:ro'
+            - './www/code:/var/www/html:z'
         links:
             - 'database'
         networks:
             www_net:
               ipv4_address: 172.16.3.10 #192.168.1.10
+            database_net:
+              ipv4_address: 172.16.4.70
     
     pma:
         hostname: 'pma.mediaway.com'
