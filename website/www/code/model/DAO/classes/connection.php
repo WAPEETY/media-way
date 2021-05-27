@@ -17,7 +17,7 @@ class Connection {
                 
                 self::$conn = new PDO($dsn, self::USER, self::PASSWORD);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                if(/*$GLOBALS['debug']*/true){
+                if($GLOBALS['debug']){
                     echo "Successfully connected:<br>" . PHP_EOL;
                 }
             } catch (PDOException $e) {
