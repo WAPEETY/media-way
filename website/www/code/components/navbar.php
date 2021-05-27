@@ -1,4 +1,4 @@
-<nav class="md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100  shadow rounded-lg md:rounded-full m-10" role="navigation">
+<nav class="sticky top-2 md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100 shadow-2xl rounded-lg md:rounded-full m-10" role="navigation">
   
   <div class="container mx-auto p-4 flex flex-wrap items-center md:flex-no-wrap">
     <div class="mr-4 md:mr-8">
@@ -10,7 +10,7 @@
       </a>
     </div>
     <div class="ml-auto md:hidden">
-      <button class="flex items-center px-3 py-2 border rounded" type="button">
+      <button class="flex items-center px-3 py-2 border rounded" type="button" onclick="toggle()">
         <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <title>Menu</title>
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
@@ -19,20 +19,18 @@
     </div>
 
 
-    <div class="w-full md:w-auto md:flex-grow md:flex md:items-center">
+    <div id="nav-items" class="nav-list w-full md:w-auto md:flex-grow md:flex md:items-center">
       <ul class="flex flex-col mt-4 -mx-4 pt-4 border-t md:flex-row md:items-center md:mx-0 md:ml-auto md:mt-0 md:pt-0 md:border-0">
         <li>
-          <a class="block px-4 py-1 md:p-2 lg:px-4" href="#" title="Link">Link</a>
+            <a class="block px-4 py-1 md:p-2 lg:px-4 uppercase text-purple-600" href="#" title="about us">chi siamo</a>
         </li>
         <li>
-          <a class="block px-4 py-1 md:p-2 lg:px-4 text-purple-600" href="#" title="Active Link">Active Link</a>
+          <a class="block px-4 py-1 md:p-2 lg:px-4 uppercase text-purple-600" href="#" title="Sign in">accedi</a>
         </li>
         <li>
-          <a class="block px-4 py-1 md:p-2 lg:px-4" href="#" title="Link">Link</a>
+          <a class="m-2 btn block px-4 py-1 md:p-2 lg:px-4 bg-purple-600 rounded-lg text-white font-semibold uppercase" href="#" title="Sign up">registrati</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
-
