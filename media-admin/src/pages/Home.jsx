@@ -1,30 +1,39 @@
 import Sidebar from '../components/sidebar'
 import EventCard from '../components/event_card'
+import {useState} from 'react'
+import {Redirect} from 'react-router-dom'
 
 export default function Home() {
+    const [eventi, setEventi]=useState([]);
+    const [newUrl, setNewUrl]=useState(null)
+    async function fetchEvents(){
+        fetch("http://api.mediaway.com:8080/event/all")
+            .then(data=>data.json())
+            .then(data=>setEventi(data.events))
+    }
+
+    if(eventi.length == 0){
+        fetchEvents()
+    }
+
+    if(newUrl !== null){
+        return(
+            <Redirect to={newUrl} />
+        )
+    }
+
     return (
         <main className="h-screen overflow-x-hidden flex flex-col sm:py-12" style={{"backgroundImage":"url(login_bg.jpg)"}}>
-            
             <div className="row-span-1 h-80 absolute mt-8 -ml-3">
                     <Sidebar />
                 </div>
-
                 <div>
                     <div className="ml-10 md:ml-32 md:mr-4 grid grid-cols-1 md:grid-cols-2">
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
-                        <div className=""><EventCard /></div>
+                    {eventi.map(a => {
+                        return ( 
+                            <div><EventCard eventName={a.name} eventDescription={a.description} setNewUrl={setNewUrl} id={a.id}/></div>
+                        )
+                    })}
                     </div>
                 </div>
         </main>

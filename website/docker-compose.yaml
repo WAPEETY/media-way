@@ -7,10 +7,12 @@ services:
         links:
             - 'database'
         volumes:
-            - './api/code:/usr/src/app:rw'
+            - './api/code:/usr/src/app:z'
         networks:
             api_net:
                 ipv4_address: 172.16.1.5
+            database_net:
+                ipv4_address: 172.16.4.80
     
 #    admin:
 #        hostname: 'admin.mediaway.com'
@@ -55,6 +57,7 @@ services:
             
     database:
         image: 'mysql:latest'
+        command: --default-authentication-plugin=mysql_native_password
         environment:
             MYSQL_ROOT_PASSWORD: rootPWD            #change in production 
             MYSQL_DATABASE: mediaway

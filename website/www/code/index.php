@@ -28,7 +28,7 @@
                 <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome evento</h3>
                 <p class="text-justify">Event description <br/> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint quibusdam quo eum quos unde? Eaque pariatur esse, atque cum modi vitae, id exercitationem sapiente non, error tempore reprehenderit eveniet magnam.</p>
                 <div class="mt-5">
-                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">Read More</a>
+                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome evento</h3>
                 <p class="text-justify">Event description <br/> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint quibusdam quo eum quos unde? Eaque pariatur esse, atque cum modi vitae, id exercitationem sapiente non, error tempore reprehenderit eveniet magnam.</p>
                 <div class="mt-5">
-                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">Read More</a>
+                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome evento</h3>
                 <p class="text-justify">Event description <br/> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint quibusdam quo eum quos unde? Eaque pariatur esse, atque cum modi vitae, id exercitationem sapiente non, error tempore reprehenderit eveniet magnam.</p>
                 <div class="mt-5">
-                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">Read More</a>
+                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome evento</h3>
                 <p class="text-justify">Event description <br/> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint quibusdam quo eum quos unde? Eaque pariatur esse, atque cum modi vitae, id exercitationem sapiente non, error tempore reprehenderit eveniet magnam.</p>
                 <div class="mt-5">
-                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">Read More</a>
+                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
                 </div>
             </div>
         </div>
@@ -68,12 +68,10 @@
                 <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome evento</h3>
                 <p class="text-justify">Event description <br/> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint quibusdam quo eum quos unde? Eaque pariatur esse, atque cum modi vitae, id exercitationem sapiente non, error tempore reprehenderit eveniet magnam.</p>
                 <div class="mt-5">
-                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">Read More</a>
+                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
                 </div>
             </div>
         </div>
-           
-        
 
         
     </div>

@@ -25,7 +25,7 @@ def send_events():
     return jsonify({
         'error': None,
         'events': events,
-    }), 501
+    }), 200
 
 
 @app.route('/event/create', methods=['POST'])
