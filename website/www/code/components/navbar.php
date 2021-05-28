@@ -1,4 +1,10 @@
-<?php $GLOBALS['debug']=false;  $logged = true;?>
+<?php if(isset($_SESSION['user_id'], $_SESSION['username'])){
+  $logged = true;
+}
+else{
+  $logged=false;
+}
+?>
 
 <nav class="z-50 sticky top-2 md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100 shadow-2xl rounded-lg md:rounded-full m-10" role="navigation">
   

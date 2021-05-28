@@ -24,6 +24,7 @@
     <title>Media Way Spa</title>
 </head>
 <body class="">
+    <?php  echo(date("y-m-d h:i:s"))?>
     <?php include_once __DIR__ . '/components/navbar.php' ?>
 
     <p class="mt-16 mx-12 md:mx-16 text-4xl text-green-300 uppercase font-bold">Prossimi eventi: </p>

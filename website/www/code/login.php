@@ -35,7 +35,7 @@
                   $_SESSION['msg_type'] = "error";
                   $logged = true;
               } else {
-                  session_regenerate_id();
+                  
                   $_SESSION['user_id'] = $record['id'];
                   $_SESSION['username'] = $username;
   
@@ -116,9 +116,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
     <input
       name="login_btn"
       type="submit"
+      value="Login"
       class="bg-purple-600 font-semibold uppercase py-4 text-center px-17 md:px-12 md:py-4 text-white rounded-lg leading-tight text-xl md:text-base font-sans mt-4 mb-20"
     >
-      Login
+      
 </input>
   </form>
 </div>
