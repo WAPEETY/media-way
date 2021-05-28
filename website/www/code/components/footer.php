@@ -42,7 +42,7 @@
       </p>
     </div>
     <div class="text-purple-600 font-bold text-2xl mt-5 text-center mt-2 mb-2">Seguici</div>
-      <div class="grid grid-cols-3 md:grid-cols-6 mx-20 md:mx-80 justify-items-center">
+      <div class="grid grid-cols-3 md:grid-cols-5 mx-20 md:mx-80 justify-items-center">
   	    <a href="http://facebook.com" style="width: min-content;" target="_blank" rel="noopener noreferrer">    
           <div class="rounded-lg w-auto p-4 mt-2 flex-1 text-gray-700 text-center bg-white" style="width: min-content;">
             <svg class="m-auto" style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -80,4 +80,4 @@
         </a>
       </div>
     </div>
-    <div class="text-l text-center text-teal-900  mt-5 ">© Media Way Spa</div>
+    <div class="text-l text-center text-purple-600 mt-5">© Media Way Spa</div>
