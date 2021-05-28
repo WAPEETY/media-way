@@ -1,7 +1,53 @@
 <?php 
-    $GLOBALS['debug']=false;
-    include_once __DIR__ . '/model/DAO/classes/connection.php';
-    $conn = Connection::getConnection();
+    session_start();
+    
+    if (isset($_SESSION['user_id'], $_SESSION['username'])) :
+        
+        header("Location: ../index.php");
+    endif;
+
+    if (isset($_POST['login_btn'])) :
+
+      if (empty($_POST['username']) || empty($_POST['password'])) :
+          $_SESSION['msg_txt'] = "Inserisci username e password.";
+          $_SESSION['msg_type'] = "error";
+      else :
+          
+          $username = trim($_POST['username']);
+          $password = trim($_POST['password']);
+          
+          try {
+            include_once __DIR__ . '/model/DAO/classes/connection.php';
+              $sql = "
+                  SELECT * 
+                  FROM agencies 
+                  WHERE username = :username";
+              $conn = Connection::getConnection();
+
+              $stm = $conn->prepare($sql);
+              $stm->bindParam(':username', $username, PDO::PARAM_STR);
+              $stm->execute();
+  
+              $record = $stm->fetch(PDO::FETCH_ASSOC);
+              
+              if (!$record || password_verify($password, trim($record['password'])) === false) {
+                  $_SESSION['msg_txt'] = "Credenziali utente errate.";
+                  $_SESSION['msg_type'] = "error";
+                  $logged = true;
+              } else {
+                  session_regenerate_id();
+                  $_SESSION['user_id'] = $record['id'];
+                  $_SESSION['username'] = $username;
+  
+                  header('Location: ../index.php');
+                  exit;
+              }
+          } catch (PDOException $e) {
+              $_SESSION['msg_txt'] = 'Errore sul server: ' . $e->getMessage();
+              $_SESSION['msg_type'] = 'error';
+          }
+      endif;
+  endif;
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +72,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
 <div class="md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100 rounded-2xl mb-10 flex mx-16 lg:mx-96 md:mx-80">
 <div class="flex-col flex ml-auto mr-auto items-center w-full lg:w-2/3 md:w-3/5">
 <h1 class="font-bold text-2xl my-10 text-white"> Login </h1>
-<form action="" class="mt-2 flex flex-col lg:w-1/2 w-8/12">
+<form action="<?php $_SERVER['PHP_SELF']?>" method="post" class="mt-2 flex flex-col lg:w-1/2 w-8/12">
     <div class="flex flex-wrap items-stretch w-full mb-4 relative h-15 bg-white items-center rounded mb-6 pr-10">
       <div class="flex -mr-px justify-center w-15 p-4">
         <span
@@ -38,7 +84,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
       <input
         type="text"
         class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border-0 h-10 border-grey-light rounded rounded-l-none px-3 self-center relative  font-roboto text-xl outline-none"
-        placeholder="Username"
+        placeholder="username"
+        name="username"
       />
     </div>
     <div class="flex flex-wrap items-stretch w-full relative h-15 bg-white items-center rounded mb-4">
@@ -54,7 +101,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
         id="passContainer"
         type="password"
         class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border-0 h-10 px-3 relative self-center font-roboto text-xl outline-none"
-        placeholder="Password"
+        placeholder="password"
+        name="password"
       />
       <div class="flex -mr-px">
         <span
@@ -65,12 +113,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
       </div>
     </div>
     <a href="#" class="text-base text-white text-right font-roboto leading-normal hover:underline mb-6">Password dimenticata?</a>
-    <a
-    href="/"
+    <input
+      name="login_btn"
+      type="submit"
       class="bg-purple-600 font-semibold uppercase py-4 text-center px-17 md:px-12 md:py-4 text-white rounded-lg leading-tight text-xl md:text-base font-sans mt-4 mb-20"
     >
       Login
-  </a>
+</input>
   </form>
 </div>
 

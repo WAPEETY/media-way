@@ -1,7 +1,14 @@
 <?php 
-    $GLOBALS['debug']=false;
+    
     include_once __DIR__ . '/model/DAO/classes/connection.php';
-    $conn = Connection::getConnection();
+    
+    session_start();
+    
+    if (isset($_SESSION['user_id'], $_SESSION['username'])) :
+        $logged = true;
+        
+    endif;
+    
 ?>
 
 <!DOCTYPE html>

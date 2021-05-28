@@ -1,3 +1,5 @@
+<?php $GLOBALS['debug']=false;  $logged = true;?>
+
 <nav class="z-50 sticky top-2 md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100 shadow-2xl rounded-lg md:rounded-full m-10" role="navigation">
   
   <div class="container mx-auto p-4 flex flex-wrap items-center md:flex-no-wrap">
@@ -24,12 +26,18 @@
         <li>
             <a class="block px-4 py-1 md:p-2 lg:px-4 uppercase text-purple-600" href="#" title="about us">chi siamo</a>
         </li>
+        <?php if(!$logged):?>
         <li>
           <a class="block px-4 py-1 md:p-2 lg:px-4 uppercase text-purple-600" href="login.php" title="Sign in">accedi</a>
         </li>
         <li>
           <a class="m-2 btn block px-4 py-1 md:p-2 lg:px-4 bg-purple-600 rounded-lg text-white font-semibold uppercase" href="signup.php" title="Sign up">registrati</a>
         </li>
+        <?php else:?>
+          <li>
+          <a class="m-2 btn block px-4 py-1 md:p-2 lg:px-4 bg-purple-600 rounded-lg text-white font-semibold uppercase" href="logout.php" title="Log out">logout</a>
+        </li>
+        <?php endif;?>
       </ul>
     </div>
   </div>
