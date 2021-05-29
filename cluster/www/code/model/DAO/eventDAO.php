@@ -65,10 +65,6 @@ class eventDAO{
         } catch (Exception $e) {
             throw new Exception("<strong>errore imprevisto,</strong>");
         }
-
-        
-        
-
         return $futureEvents;
     }
 }

@@ -50,11 +50,19 @@
                             </div>
                         </div>
                         <div class="my-4 md:mx-4 shadow-md bg-gradient-to-t from-red-100 via-pink-100 to-red-100 shadow-lg rounded-lg">
-                            <div class="p-4">
-                                <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome dispositivo - marca</h3>
-                                <p class="text-justify"></p>
-                                <div class="mt-5">
-                                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
+                            <div class="p-4 grid grid-cols-2">
+                                <div class="font-medium text-gray-600 text-lg my-2 uppercase">
+                                    <select class="rounded-full py-2 px-3 font-semibold" name="model" id="model">
+                                        <?php 
+                                            include_once __DIR__ . '/model/DAO/modelDAO.php';
+                                            foreach(modelDAO::getModelsList() as $model){
+                                                echo("<option value=" . $model->getID() . ">". $model->getName() . " - " . $model->getBrand() ."</option>");
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="my-2">
+                                    <a href="" class="hover:bg-gray-700 py-2 font-semibold font-2xl rounded-full hover:text-white bg-gray-400 text-gray-100">prenota</a>
                                 </div>
                             </div>
                         </div>
@@ -71,13 +79,30 @@
                 <?php
             }
             else{
-                echo("<script> alert('devi aspettare che un membro di media way abiliti il tuo account')
-                     window.location.href('/'); </script>");
+                
+                ?>
+                
+                <script> alert("il tuo account non é ancora stato abilitato")
+                     setTimeout(
+                        function(){
+                            window.location.replace('/');
+                        },
+                        10
+                     ) 
+                </script>
+                <?php
             }
         }
         else{
             ?>
-            <script> alert("devi fare l'accesso per poterti prenotare") window.location.href('/'); </script>
+            <script> alert("devi fare l'accesso per poterti prenotare")
+                     setTimeout(
+                        function(){
+                            window.location.replace('/');
+                        },
+                        10
+                     ) 
+            </script>
             <?php
             
         }
