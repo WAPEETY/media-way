@@ -1,0 +1,21 @@
+@media only screen and (max-width: 601px) {
+    .nav-list{
+    height: 0;
+}
+
+.nav-list.open{
+    height: auto;
+}
+
+.nav-list *{
+    display: none;
+}
+
+.nav-list.nav-list.open *{
+    display: block;
+}
+}
+
+.btn{
+    width: min-content;
+} 
