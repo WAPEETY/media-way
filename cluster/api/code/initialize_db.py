@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Esegui sto coso per azzerare e ricreare il database
+# Script per settare il db
 
 from app import app, db
 from models import *
@@ -7,7 +7,7 @@ from os import remove
 import datetime
 
 
-remove('app.db')
+#remove('app.db')
 db.create_all()
 
 # Utenti

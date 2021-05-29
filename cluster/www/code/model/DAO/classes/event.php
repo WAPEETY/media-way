@@ -10,7 +10,7 @@ class Event{
     private string $description;
     private string $opens_at;
 
-    function __construct(int $id, string $name,int $latitude, int $longitude, string $start_day, string $end_day, string $description, string $opens_at){
+    function __construct(int $id, string $name,float $latitude, float $longitude, string $start_day, string $end_day, string $description, string $opens_at){
         $this->id = $id;
         $this->name = $name;
         $this->latitude = $latitude;
@@ -27,14 +27,14 @@ class Event{
     function getName():string{
         return $this->name;
     }
-    function getLatitude():int{
-        return $this->lat;
+    function getLatitude():float{
+        return $this->latitude;
     }
-    function getLongitude():int{
-        return $this->long;
+    function getLongitude():float{
+        return $this->longitude;
     }
     function getCoordinates():array{
-        return $coordinates = array("latitude"=>$this->lat,"longitude"=>$this->long)
+        return $coordinates = array("latitude"=>$this->lat,"longitude"=>$this->long);
     }
     function getStartDay():string{
         return $start_day = $this->start_day;
@@ -43,7 +43,7 @@ class Event{
         return $end_day = $this->end_day;
     }
     function getDescription():string{
-        return $description = this->description;
+        return $description = $this->description;
     }
     function getOpensAt():string{
         return $opens_at = $this->opens_at;

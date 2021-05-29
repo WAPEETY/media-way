@@ -54,7 +54,7 @@ class Agency(Base):
     password = db.Column(db.String(512), nullable=False)
     PEC = db.Column(db.String(300), nullable=False)
     name = db.Column(db.String(64), nullable=False)
-    enabled = db.Column(db.Boolean, nullable=False, default=False)
+    enabled = db.Column(db.Boolean, nullable=False, default=0)
 
     def toObject(self):
         return {

@@ -32,4 +32,6 @@ session_start();
     </div>
 
     <?php include_once __DIR__ . '/components/footer.php' ?>
+
+    <script src="<?php __DIR__?> /res/js/functions.js"></script>
 </body>

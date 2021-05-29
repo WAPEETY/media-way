@@ -6,7 +6,7 @@ export default function sidebar(){
                     <div className="mt-10">
                         <ul>
                         <li className="mb-6">
-                                <a href="home">
+                                <a href="/">
                                     <span>
                                         <svg
                                             className="fill-current h-6 w-6 mx-auto text-gray-900 hover:text-green-500"

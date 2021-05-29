@@ -6,13 +6,15 @@ class Agency{
     private string $password;
     private string $pec;
     private string $name;
+    private bool $enabled;
 
-    function __construct(int $id, string $username,string $password,string $pec,string $name){
+    function __construct(int $id, string $username,string $password,string $pec,string $name,bool $enabled){
         $this->id = $id;
         $this->username = $username;
         $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->pec = $pec;
         $this->name = $name;
+        $this->enabled = $enabled;
     }
 
     function getId(){
@@ -29,6 +31,9 @@ class Agency{
     }
     function getName(){
         return $this->name;
+    }
+    function isEnabled(){
+        return $this->enabled;
     }
 
     function setId(int $id){
