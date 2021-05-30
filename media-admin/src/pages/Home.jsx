@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar'
 import EventCard from '../components/event_card'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
 
 export default function Home() {
@@ -9,12 +9,20 @@ export default function Home() {
     async function fetchEvents(){
         fetch("http://api.mediaway.com:8080/event/all")
             .then(data=>data.json())
-            .then(data=>setEventi(data.events))
+            .then(data=>{
+                let ne = []
+                data.events.map(i=>{
+                    let event_date = Date.parse(i.period[1])
+                    if((new Date()) < event_date){
+                        ne.push(i)
+                    }
+                })
+                setEventi(ne)
+            })
     }
 
-    if(eventi.length == 0){
-        fetchEvents()
-    }
+    useEffect(()=>fetchEvents(), [])
+    
 
     if(newUrl !== null){
         return(

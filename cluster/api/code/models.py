@@ -141,4 +141,5 @@ class Model(Base):
             'id': self.id,
             'name': self.name,
             'freq': [self.min_freq, self.max_freq],
+            'brand':Brand.query.get(self.brand).name,
         }

@@ -36,7 +36,7 @@ export default function sidebar(){
                                 </a>
                             </li>
                             <li className="mb-6">
-                                <a href="#">
+                                <a href="/devices">
                                     <span>
                                         <svg
                                           className="fill-current h-5 w-5 text-gray-9 00 mx-auto hover:text-green-500"

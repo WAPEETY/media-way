@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
 import Events_calendar from './pages/Events_calendar';
+import Devices from './pages/Devices';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/devices">
+          <Devices /> 
         </Route>
         <Route exact path="/users">
           pagina per gestire utenti da accettare

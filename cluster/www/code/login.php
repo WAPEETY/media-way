@@ -69,7 +69,7 @@
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 />
-<div class="md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100 rounded-2xl mb-10 flex mx-16 lg:mx-96 md:mx-80">
+<div class="md:bg-gradient-to-r bg-gradient-to-b from-green-400 to-blue-100 rounded-2xl mb-10 flex mx-8 lg:mx-32 md:mx-80">
 <div class="flex-col flex ml-auto mr-auto items-center w-full lg:w-2/3 md:w-3/5">
 <h1 class="font-bold text-2xl my-10 text-white"> Login </h1>
 <form action="<?php $_SERVER['PHP_SELF']?>" method="post" class="mt-2 flex flex-col lg:w-1/2 w-8/12">

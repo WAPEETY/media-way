@@ -123,10 +123,14 @@ def delete_event_device(event_id, device_id):
 
 @app.route('/device/all')
 def send_devices():
+    devices = []
+    for x in models.Model.query.all():
+        devices.append(x.toObject())
+
     return jsonify({
-        'error': 'Not implemented',
-        'devices': [],
-    }), 501
+        'error': None,
+        'device': devices,
+    }), 200
 
 
 @app.route('/device/create')
@@ -137,10 +141,20 @@ def create_device():
 
 
 @app.route('/device/<int:id>/delete')
-def read_device_data():
-    return jsonify({
-        'error': 'Not implemented',
-    }), 501
+def delete_device_data(id):
+    
+    try:
+        device = models.Model.query.get(id)
+        db.session.delete(device)
+        db.session.commit()
+        return jsonify({
+            'error': None,
+        }), 200
+    
+    except Exception as e:
+        return jsonify({
+            'error': "Error while deleting device"
+        }), 404
 
 
 @app.route('/device/<int:id>/update')
