@@ -133,11 +133,48 @@ def send_devices():
     }), 200
 
 
-@app.route('/device/create')
+@app.route('/device/create', methods=['POST'])
 def create_device():
-    return jsonify({
-        'error': 'Not implemented',
-    }), 501
+    error = None
+    status = 200
+    try:
+        args = request.get_json(force=True)
+        name = args.get('name', None)
+        brand_name = args.get('brand', None)
+        minHz = args.get('min', None)
+        maxHz = args.get('max', None)
+        if None in [name, brand_name, minHz, maxHz]:
+            raise Exception('Missing data')
+        
+        selected_brand = models.Brand.query.filter(models.Brand.name.like(brand_name))
+        if selected_brand.count() == 0:
+            selected_brand = models.Brand(
+                name = brand_name
+            )
+            db.session.add(selected_brand)
+            db.session.commit()
+        
+        else:
+            selected_brand = selected_brand.first()
+        
+        foobar = models.Model(
+            name = name,
+            brand = selected_brand.id,
+            min_freq = minHz,
+            max_freq = maxHz
+        )
+
+        db.session.add(foobar)
+        db.session.commit()
+    
+    except Exception as e:
+        error = str(e)
+        status = 200
+
+    finally:
+        return jsonify({
+            'error': error,
+        }), status
 
 
 @app.route('/device/<int:id>/delete')
@@ -174,10 +211,14 @@ def delete_device():
 
 @app.route('/user/all')
 def send_users():
+    events = []
+    for x in models.Agency.query.all():
+        events.append(x.toObject())
+
     return jsonify({
-        'error': 'Not implemented',
-        'users': [],
-    }), 501
+        'error': None,
+        'agencies': events,
+    }), 200
 
 
 @app.route('/user/<int:id>')
@@ -187,3 +228,36 @@ def get_user_data(id):
         'user': {},
     }), 501
 
+
+@app.route('/user/<int:id>/activate')
+def activate_user_by(id):
+    error = None
+    status = 200
+    try:
+        foobar = models.Agency.query.get(id)
+        if foobar is None:
+            raise Exception('Utente non esiste')
+
+        foobar.enabled = True
+        db.session.commit()
+    
+    except Exception as e:
+        error = str(e)
+        status = 400
+
+    finally:
+        return jsonify({
+            'error': error
+        }), status
+
+
+@app.route('/brand/all')
+def get_all_brands():
+    data = []
+    for x in models.Brand.query.all():
+        data.append(x.toObject())
+    
+    return jsonify({
+        'error': None,
+        'brands': data
+    }), 200

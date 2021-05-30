@@ -60,7 +60,9 @@ class Agency(Base):
         return {
             'id': self.id,
             'name': self.name,
-            'is_active': self.is_active,
+            'username': self.username,
+            'pec': self.PEC,
+            'is_active': self.enabled,
         }
 
 

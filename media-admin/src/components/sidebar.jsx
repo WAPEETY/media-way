@@ -21,7 +21,7 @@ export default function sidebar(){
                                 </a>
                             </li>
                             <li className="mb-6">
-                                <a href="#">
+                                <a href="/users">
                                     <span>
                                         <svg
                                             className="fill-current h-5 w-5 mx-auto text-gray-900 hover:text-green-500"
