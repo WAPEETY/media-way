@@ -1,5 +1,4 @@
-# https://www.submarinecablemap.com/
-# This website is an archive of the electric lines.
+
 
 from app import db
 from sqlalchemy.dialects.mysql import BIGINT

@@ -38,16 +38,15 @@ export default function Home() {
         <main className="h-screen overflow-x-hidden flex flex-col sm:py-12" style={{"backgroundImage":"url(login_bg.jpg)"}}>
             <div className="row-span-1 h-80 absolute mt-8 -ml-3">
                     <Sidebar />
-                </div>
+            </div>
                 {modalStatus ? <AddEventModal closer={_ => {setModal(false);}} /> : null}
-                <div>
-                    <div className="ml-10 md:ml-32 md:mr-4 grid grid-cols-1 md:grid-cols-2">
-                    {eventi.map(a => {
-                        return ( 
-                            <div><EventCard eventName={a.name} eventDescription={a.description} setNewUrl={setNewUrl} id={a.id}/></div>
-                        )
-                    })}
-
+            <div>
+                <div className="ml-10 md:ml-32 md:mr-4 grid grid-cols-1 md:grid-cols-2">
+                {eventi.map(a => {
+                    return ( 
+                        <div><EventCard eventName={a.name} eventDescription={a.description} setNewUrl={setNewUrl} id={a.id}/></div>
+                    )
+                })}
                     <div className="lg:m-4 inline-block align-middle shadow-md hover:shadow-lg hover:bg-gray-100 rounded-lg bg-white my-12 mx-8 cursor-pointer">
                         <div className="p-4 ">
                             <div onClick={_ => setModal(true)} className="inline-block align-middle flex m-auto justify-center">
@@ -57,9 +56,8 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-
-                    </div>
                 </div>
+            </div>
         </main>
     )
 }

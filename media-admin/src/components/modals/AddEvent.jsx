@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import Map from '../map'
 
 export default function AddEventModal(props) {
     const [nome, setNome] = useState('')
@@ -44,7 +45,9 @@ export default function AddEventModal(props) {
                                 <label className="text-gray-400">data fine:</label><input type="datetime-local" value={endDay}  onChange={event => setEndDay(event.target.value)} className="col-span-2 border-2 rounded-full px-3 py-2 w-full bg-white text-gray-700 focus:outline-none focus:border-blue-400 focus:shadow" />
                                 <label className="text-gray-400">apertura iscrizioni:</label><input type="datetime-local" value={opensAt}  onChange={event => setOpensAt(event.target.value)} className="col-span-2 border-2 rounded-full px-3 py-2 w-full bg-white text-gray-700 focus:outline-none focus:border-blue-400 focus:shadow" />
 
-
+                                <input type="number" value={latitude} onChange={event => setLatitude(event.target.value)} className="border-2 rounded-full px-3 py-2 w-full bg-white text-gray-700 focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Latitudine" max="1000000" min="0" />
+                                <input type="number" value={longitude} onChange={event => setLongitude(event.target.value)} className="border-2 rounded-full px-3 py-2 w-full bg-white text-gray-700 focus:outline-none focus:border-blue-400 focus:shadow" placeholder="Longitudine" max="1000000" min="0" />
+                                
                             </div>
                         </div>
                             <div className="flex flex-row-reverse pt-4 mx-2 pb-2">

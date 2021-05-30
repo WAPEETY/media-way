@@ -30,27 +30,42 @@ def send_events():
 
 @app.route('/event/create', methods=['POST'])
 def create_event():
+    error = "none"
     try:
-        FooBar = models.Event(
-            name=request.form['name'],
-            latitude=request.form['lat'],
-            longitude=request.form['lng'],
-            start_day=datetime.now(),
-            end_day=datetime.now(),
-            description=request.form['description'],
-            opens_at=datetime.now()
-        )
+        args = request.get_json(force=True)
+        name = args.get('name', None)
+        latitude = args.get('latitude', None)
+        longitude = args.get('longitude', None)
+        startDay = args.get('startDay', None)
+        endDay = args.get('endDay', None)
+        description = args.get('description', None)
+        opensAt = args.get('opensAt', None)
 
+        if None in [name, latitude, longitude, startDay, endDay, description, opensAt]:
+            raise Exception('Missing data')            
+
+        FooBar = models.Event(
+            name = name,
+            latitude = latitude,
+            longitude = longitude,
+            start_day = startDay,
+            end_day = endDay,
+            description = description,
+            opens_at = opensAt
+        )
+        
         db.session.add(FooBar)
         db.session.commit()
-        return jsonify({
-            'error': None
-        }), 200
+        
     
     except Exception as e:
+            error = str(e),
+            status = 400
+    
+    finally:
         return jsonify({
-            'error': str(e),
-        }), 400
+            'error': error,
+        }), status
 
 
 @app.route('/event/<int:id>/read', methods=['GET', 'POST'])

@@ -13,6 +13,7 @@ import Home from './pages/Home'
 import Events_calendar from './pages/Events_calendar';
 import Devices from './pages/Devices';
 import Users from './pages/Users';
+import Events from './pages/Events';
 
 function App() {
   return (
@@ -31,8 +32,7 @@ function App() {
           <Users /> 
         </Route>
         <Route exact path="/event/:id">
-          pagina lista dispositivi per ogni evento
-          <event /> 
+          <Events /> 
         </Route>
         <Route exact path="/events_calendar">
           <Events_calendar />
