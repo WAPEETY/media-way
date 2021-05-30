@@ -14,8 +14,49 @@
             $enabled = false;
         }
     endif;
+    
+    try{
+        $event = eventDAO::getEvent($_GET['id']);
+    }
+    catch(PDOException){
+        ?>
+        <script> alert("l'evento non esiste o non é ancora stato aperto")
+                     setTimeout(
+                        function(){
+                            window.location.replace('/');
+                        },
+                        10
+                    ) 
+        </script>
+        <?php
+    }
+    
+    
+    if($event->getOpensAt() > date("Y-m-d h:i:s")){
+        ?>
+        <script> alert("l'evento non esiste o non é ancora stato aperto")
+                     setTimeout(
+                        function(){
+                            window.location.replace('/');
+                        },
+                        10
+                    ) 
+        </script>
+        <?php
+    }
 
-    $event = eventDAO::getEvent($_GET['id']);
+    if(isset($_POST['add_submit'])){
+        if(empty($_POST['model'])){
+            $_SESSION['msg_txt'] = "Almeno un campo non é stato compilato correttamente.";
+            $_SESSION['msg_type'] = "error";
+        }
+        else{
+            $sql = "INSERT INTO used_devices (date_created, reservation, id_model)";
+        }
+    }
+    if(isset($_POST['remove_submit'])){
+        //query per rimuovere device
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,28 +84,31 @@
                         <div class="my-4 md:mx-4 shadow-md bg-gradient-to-t from-red-100 via-pink-100 to-red-100 shadow-lg rounded-lg">
                             <div class="p-4">
                                 <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome dispositivo - marca</h3>
-                                <p class="text-justify"></p>
+                                <p class="text-justify">Min freq 600 mhz - Max freq 800 mhz</p>
                                 <div class="mt-5">
-                                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">prenota</a>
+                                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">rimuovi</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="my-4 md:mx-4 shadow-md bg-gradient-to-t from-red-100 via-pink-100 to-red-100 shadow-lg rounded-lg">
-                            <div class="p-4 grid grid-cols-2">
-                                <div class="font-medium text-gray-600 text-lg my-2 uppercase">
-                                    <select class="rounded-full py-2 px-3 font-semibold" name="model" id="model">
+                        <div class="">
+                            <form action="<? $_SERVER['PHP_SELF']?>" method="post">
+                                <div class="p-4 grid md:grid-cols-2 grid-cols-1">
+                                    <div class="relative inline-flex">
+                                    <svg class="w-2 h-2 absolute top-2 md:top-0 right-32 md:right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232"><path d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z" fill="#648299" fill-rule="nonzero"/></svg>
+                                    <select class="border border-gray-300 mt-2 rounded-full text-gray-600 h-10 pl-3 pr-8 bg-white hover:border-gray-400 focus:outline-none appearance-none" name="model" id="model">
                                         <?php 
                                             include_once __DIR__ . '/model/DAO/modelDAO.php';
                                             foreach(modelDAO::getModelsList() as $model){
-                                                echo("<option value=" . $model->getID() . ">". $model->getName() . " - " . $model->getBrand() ."</option>");
+                                                echo("<option class='font-bold py-3' value=" . $model->getID() . ">". $model->getName() . " - " . $model->getBrand() ."</option>");
                                             }
                                         ?>
                                     </select>
+                                    </div>
+                                    <div class="">
+                                        <input type="submit" name="submit" value="aggiungi dispositivo" class="mt-2 bg-purple-600 px-3 uppercase text-md font-bold text-white py-2 font-semibold font-2xl rounded-full "></input>
+                                    </div>
                                 </div>
-                                <div class="my-2">
-                                    <a href="" class="hover:bg-gray-700 py-2 font-semibold font-2xl rounded-full hover:text-white bg-gray-400 text-gray-100">prenota</a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
 
                     </div>
