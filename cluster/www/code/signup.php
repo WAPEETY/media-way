@@ -170,20 +170,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
   ?>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 
     <?php include_once __DIR__ . '/components/footer.php' ?>
