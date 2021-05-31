@@ -97,5 +97,29 @@ include_once __DIR__ . '/classes/used_device.php';
             $_SESSION['msg_type'] = 'error';
             }
     }
+
+    static function removeDevice(int $id){
+        $sql = "DELETE FROM used_devices"
+            .  " WHERE id = :id";
+        $conn = Connection::getConnection();
+        try{
+            $stm = $conn->prepare($sql);
+            $stm->bindParam(':id',$id, PDO::PARAM_INT);
+            $stm->execute();
+
+            if ($stm->rowCount() > 0){
+                $_SESSION['msg_txt'] = "dipositivo rimosso con successo";
+                $_SESSION['msg_type'] = "success";
+
+            }else{
+                $_SESSION['msg_txt'] = "Si é verificato un problema con la rimozione dei dati";
+                $_SESSION['msg_type'] = "error";
+            }
+        } 
+        catch(PDOException $e) {
+        $_SESSION['msg_txt'] = "Attenzione, il dispositivo non è stato rimosso: " . $e->getMessage();
+        $_SESSION['msg_type'] = 'error';
+        }
+    }
 }
 ?>

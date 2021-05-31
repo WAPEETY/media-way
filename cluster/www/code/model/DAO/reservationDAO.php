@@ -112,6 +112,61 @@ class reservationDAO{
         }
         return $reservationList;
     }
+
+    static function addReservation(Reservation $obj){
+        $now = date("y-m-d h:i:s");
+        $sql = "INSERT INTO reservations (date_created, agency, event)"
+            .  " VALUES (:date_created, :agency, :event)";
+        $conn = Connection::getConnection();
+        try{
+            $stm = $conn->prepare($sql);  
+            
+            $agency = $obj->getAgency();
+            $event = $obj->getEvent();
+            $stm->bindParam(':date_created',$now, PDO::PARAM_STR);
+            $stm->bindParam(':agency', $agency, PDO::PARAM_INT);
+            $stm->bindParam(':event', $event, PDO::PARAM_INT);
+            $stm->execute();
+            
+            
+                if ($stm->rowCount() > 0){
+                    $_SESSION['msg_txt'] = "dipositivo aggiunto con successo";
+                    $_SESSION['msg_type'] = "success";
+
+                }else{
+                    $_SESSION['msg_txt'] = "Si é verificato un problema con l'inserimento dei dati";
+                    $_SESSION['msg_type'] = "error";
+                }
+            } 
+            catch(PDOException $e) {
+            $_SESSION['msg_txt'] = "Attenzione, il dispositivo non è stato aggiunto: " . $e->getMessage();
+            $_SESSION['msg_type'] = 'error';
+            }
+    }
+
+    static function removeReservation(int $id){
+        $sql = "DELETE FROM reservations"
+            .  " WHERE id = :id";
+        $conn = Connection::getConnection();
+        try{
+            $stm = $conn->prepare($sql);
+            $stm->bindParam(':id',$id, PDO::PARAM_INT);
+            $stm->execute();
+
+            if ($stm->rowCount() > 0){
+                $_SESSION['msg_txt'] = "prenotazione rimossa con successo";
+                $_SESSION['msg_type'] = "success";
+
+            }else{
+                $_SESSION['msg_txt'] = "Si é verificato un problema con la rimozione dei dati";
+                $_SESSION['msg_type'] = "error";
+            }
+        } 
+        catch(PDOException $e) {
+        $_SESSION['msg_txt'] = "Attenzione, la prenotazione non è stata rimossa: " . $e->getMessage();
+        $_SESSION['msg_type'] = 'error';
+        }
+    }
 }
 
 ?>

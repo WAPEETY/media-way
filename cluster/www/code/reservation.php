@@ -1,12 +1,14 @@
 <?php
     session_start();
     
-    include_once __DIR__ .'/model/DAO/agencyDAO.php';
+    include_once __DIR__ . '/model/DAO/agencyDAO.php';
     include_once __DIR__ . '/model/DAO/eventDAO.php';
-    include_once __DIR__ .'/model/DAO/modelDAO.php';
+    include_once __DIR__ . '/model/DAO/modelDAO.php';
     include_once __DIR__ . '/model/DAO/reservationDAO.php';
     include_once __DIR__ . '/model/DAO/used_deviceDAO.php';
     include_once __DIR__ . '/model/DAO/modelDAO.php';
+
+    $isBooked = false;
 
     if (isset($_SESSION['user_id']) and isset($_SESSION['username'])){
         $agency = agencyDAO::getAgency($_SESSION['user_id']);
@@ -16,6 +18,10 @@
                 $isBooked = true;
                 $reservation = reservationDAO::getReservationByAgencyAndEvent($agency->getId(),$_GET['id']);
                 $devices = used_deviceDAO::getUsedDevicesListInReservation($reservation->getId());
+                if(empty($devices)){
+                    reservationDAO::removeReservation($reservation->getId());
+                    $isBooked = false;
+                }
             }
         }
         else{
@@ -86,21 +92,20 @@
             $_SESSION['msg_type'] = "error";
         }
         else{
-            if($isBooked){
-
-                $dev = new Used_device(0, 0, $reservation->getId() ,$_POST['model']);
-                used_deviceDAO::addDevice($dev);
-                $devices = used_deviceDAO::getUsedDevicesListInReservation($reservation->getId());
-                echo($_SESSION['msg_txt']);
+            if(!$isBooked){
+                $res = new Reservation(0,$agency->getId(),$_GET['id']);
+                reservationDAO::addReservation($res);
+                $isBooked = true;
+                $reservation = reservationDAO::getReservationByAgencyAndEvent($agency->getId(),$_GET['id']);
             }
-            else{
-                //aggiunge prenotazione e poi aggiunge device
-            }
+            $dev = new Used_device(0, 0, $reservation->getId() ,$_POST['model']);
+            used_deviceDAO::addDevice($dev);
+            $devices = used_deviceDAO::getUsedDevicesListInReservation($reservation->getId());
         }
     }
     if(isset($_POST['remove_submit'])){
-        //query per rimuovere device
-        echo($_POST['id_device']);
+        used_deviceDAO::removeDevice($_POST['id_device']);
+        $devices = used_deviceDAO::getUsedDevicesListInReservation($reservation->getId());
     }
 ?>
 
