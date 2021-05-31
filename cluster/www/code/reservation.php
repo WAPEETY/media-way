@@ -3,6 +3,9 @@
     
     include_once __DIR__ .'/model/DAO/agencyDAO.php';
     include_once __DIR__ . '/model/DAO/eventDAO.php';
+    include_once __DIR__ .'/model/DAO/modelDAO.php';
+    include_once __DIR__ . '/model/DAO/reservationDAO.php';
+    include_once __DIR__ . '/model/DAO/used_deviceDAO.php';
 
     if (isset($_SESSION['user_id']) and isset($_SESSION['username'])):
         $logged = true;
@@ -45,6 +48,8 @@
         <?php
     }
 
+    
+
     if(isset($_POST['add_submit'])){
         if(empty($_POST['model'])){
             $_SESSION['msg_txt'] = "Almeno un campo non é stato compilato correttamente.";
@@ -81,15 +86,35 @@
                 <div class="mt-10 mx-8 md:mx-32  grid grid-cols-1 md:grid-cols-2">
 
                     <div>
-                        <div class="my-4 md:mx-4 shadow-md bg-gradient-to-t from-red-100 via-pink-100 to-red-100 shadow-lg rounded-lg">
-                            <div class="p-4">
-                                <h3 class="font-medium text-gray-600 text-lg my-2 uppercase">Nome dispositivo - marca</h3>
-                                <p class="text-justify">Min freq 600 mhz - Max freq 800 mhz</p>
-                                <div class="mt-5">
-                                    <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">rimuovi</a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                        
+                            if(agencyDAO::isInEvent($_GET['id'], $_SESSION['user_id'])){
+                                $reservation = reservationDAO::getReservationByAgencyAndEvent($agency->getId(),$_GET['id']);
+                                $devices = used_deviceDAO::getUsedDevicesListInReservation($reservation->getId());
+
+                                foreach($devices as $d){
+                                    $d = modelDAO::getModel($d->getModel());
+                                ?>
+                                
+                                    <div class="my-4 md:mx-4 shadow-md bg-gradient-to-t from-red-100 via-pink-100 to-red-100 shadow-lg rounded-lg">
+                                        <div class="p-4">
+                                            <h3 class="font-medium text-gray-600 text-lg my-2 uppercase"><?php echo($d->getName() . " -  " . $d->getBrand()); ?></h3>
+                                            <p class="text-justify">Min freq <?php echo($d->getMinHZ() / 1000000) ?> mHz - Max freq <?php echo($d->getMaxHZ() / 1000000) ?> mhz</p>
+                                            <div class="mt-5">
+                                                <a href="" class="hover:bg-gray-700 rounded-full py-2 px-3 font-semibold hover:text-white bg-gray-400 text-gray-100">rimuovi</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <?php
+                                }
+                            }
+                            else{
+                                echo("<p class='mt-16 mx-12 md:mx-16 text-xl text-green-300 font-bold'>Non sei ancora prenotato per questo evento, <br /> inizia ad aggiungere i dispositivi</p>");
+                            }
+
+                        ?>
+
                         <div class="">
                             <form action="<? $_SERVER['PHP_SELF']?>" method="post">
                                 <div class="p-4 grid md:grid-cols-2 grid-cols-1">

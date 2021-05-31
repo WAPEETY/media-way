@@ -29,5 +29,21 @@ class agencyDAO{
                 }
                 return $agency;
     }
+
+    static function isInEvent(int $eventId,int $agencyId):bool{
+        $sql =  "SELECT $agencyId IN (SELECT agency FROM reservations WHERE event = $eventId) AS res";
+        try {
+            $conn = Connection::getConnection();
+            $stm = $conn->prepare($sql);
+            $stm->execute();
+            if (!$row = $stm->fetch(PDO::FETCH_ASSOC)) {
+                throw new PDOException('<strong>errore</strong>');
+            }
+            return $row['res'] != 0;
+        }
+        catch (Exception $e) {
+            throw new Exception("<strong>errore imprevisto</strong>");
+        }
+    }
 }
 ?>

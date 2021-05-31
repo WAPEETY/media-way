@@ -5,10 +5,10 @@ include_once __DIR__ . '/classes/model.php';
 class modelDAO{
     static function getModel(int $id):Model{
         $sql = "SELECT models.id, models.name, models.min_freq, models.max_freq, brands.name AS bname"
-             . "FROM models"
-             . "INNER JOIN brands"
-             . "ON models.brand = brands.id"
-             . "WHERE models.id = NULLIF(:id, '')";
+             . " FROM models"
+             . " INNER JOIN brands"
+             . " ON models.brand = brands.id"
+             . " WHERE models.id = NULLIF(:id, '')";
 
              try {
                 $conn = Connection::getConnection();
@@ -29,7 +29,7 @@ class modelDAO{
                 } catch (PDOException $e) {
                 throw $e;
             } catch (Exception $e) {
-                throw new Exception("<strong>errore imprevisto,</strong>");
+                throw new Exception("<strong>errore imprevisto</strong>");
             }
             return $model;
     }
