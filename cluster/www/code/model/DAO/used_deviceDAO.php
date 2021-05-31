@@ -63,11 +63,39 @@ include_once __DIR__ . '/classes/used_device.php';
             } catch (Exception $e) {
                 throw new Exception("<strong>errore imprevisto</strong>");
             }
-    
-            
-            
-    
-            return $usedDevicesList;
+           return $usedDevicesList;
         }
+
+        static function addDevice(Used_device $dev){
+            $now = date("y-m-d h:i:s");
+            $sql = "INSERT INTO used_devices (date_created, reservation, idModel)"
+                .  " VALUES (:date_created, :reservation, :id_model)";
+            $conn = Connection::getConnection();
+            try{
+                $stm = $conn->prepare($sql);
+                
+                $reservation = $dev->getReservation();
+                $model = $dev->getModel();
+
+                $stm->bindParam(':date_created',$now, PDO::PARAM_STR);
+                $stm->bindParam(':reservation', $reservation, PDO::PARAM_INT);
+                $stm->bindParam(':id_model', $model, PDO::PARAM_INT);
+                $stm->execute();
+            
+            
+                if ($stm->rowCount() > 0){
+                    $_SESSION['msg_txt'] = "dipositivo aggiunto con successo";
+                    $_SESSION['msg_type'] = "success";
+
+                }else{
+                    $_SESSION['msg_txt'] = "Si é verificato un problema con l'inserimento dei dati";
+                    $_SESSION['msg_type'] = "error";
+                }
+            } 
+            catch(PDOException $e) {
+            $_SESSION['msg_txt'] = "Attenzione, il dispositivo non è stato aggiunto: " . $e->getMessage();
+            $_SESSION['msg_type'] = 'error';
+            }
     }
+}
 ?>
