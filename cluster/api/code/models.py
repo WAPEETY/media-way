@@ -1,5 +1,3 @@
-
-
 from app import db
 from sqlalchemy.dialects.mysql import BIGINT
 
@@ -14,8 +12,6 @@ class Base(db.Model):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
 
-
-# -- Roba utenti
 class Admin(Base):
     __tablename__ = 'admins'
 
@@ -44,8 +40,6 @@ class LogType(Base):
     description = db.Column(db.String(4096), nullable=False)
 
 
-
-# -- Roba eventi
 class Agency(Base):
     __tablename__ = 'agencies'
 
