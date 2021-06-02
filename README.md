@@ -8,6 +8,7 @@ A simple client server application to manage reservations about short range freq
 ```
 172.16.1.5 api.mediaway.com
 172.16.3.10 mediaway.com
+172.16.4.69 pma.mediaway.com
 ```
 
 2. Install **docker** and **docker-compose**
