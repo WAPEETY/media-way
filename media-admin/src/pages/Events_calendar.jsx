@@ -1,7 +1,14 @@
 import Sidebar from '../components/sidebar'
 import Calendar from '../components/calendar'
+import Cookies from "js-cookie"
+import {Redirect} from "react-router-dom"
 
 export default function Events_calendar(){
+    
+    if(Cookies.get("token") == null){
+        return <Redirect to="/login" />
+    }
+    
     return(
         <main className="h-screen overflow-x-hidden flex flex-col sm:py-12" style={{"backgroundImage":"url(login_bg.jpg)"}}>
             

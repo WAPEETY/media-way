@@ -3,7 +3,7 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y mysql*
 RUN pip install --no-cache-dir gunicorn \
- && pip install flask Flask-SQLAlchemy mysqlclient
+ && pip install flask Flask-SQLAlchemy mysqlclient pyjwt
 WORKDIR /usr/src/app
 EXPOSE 80
 

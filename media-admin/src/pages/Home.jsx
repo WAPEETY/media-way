@@ -3,6 +3,7 @@ import EventCard from '../components/event_card'
 import AddEventModal from '../components/modals/AddEvent'
 import {useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 export default function Home() {
     
@@ -25,13 +26,17 @@ export default function Home() {
             })
     }
 
-    useEffect(()=>fetchEvents(), [])
+    useEffect(_=>fetchEvents(), [])
     
 
     if(newUrl !== null){
         return(
             <Redirect to={newUrl} />
         )
+    }
+
+    if(Cookies.get("token") == null){
+        setNewUrl("/login")
     }
 
     return (

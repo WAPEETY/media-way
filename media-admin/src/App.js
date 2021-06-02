@@ -14,6 +14,7 @@ import Events_calendar from './pages/Events_calendar';
 import Devices from './pages/Devices';
 import Users from './pages/Users';
 import Events from './pages/Events';
+import Logout from './pages/Logout'
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route exact path="/events_calendar">
           <Events_calendar />
+        </Route>
+        <Route exact path="/logout">
+          <Logout />
         </Route>
         <Route path="*">
           <NotFound />

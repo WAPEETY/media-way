@@ -1,5 +1,13 @@
 import Sidebar from '../components/sidebar'
+import Cookies from "js-cookie"
+import {Redirect} from "react-router-dom"
+
 export default function Events(props){
+
+    if(Cookies.get("token") == null){
+        return <Redirect to="/login" />
+    }
+
     return(
         <main className="h-screen overflow-x-hidden flex flex-col sm:py-12" style={{"backgroundImage":"url(../login_bg.jpg)"}}>
             <div className="row-span-1 h-80 absolute mt-8 -ml-3">

@@ -27,4 +27,4 @@ CSRF_SESSION_KEY = "secret"
 TEMPLATES_AUTO_RELOAD = True
 
 # Secret key for signing cookies
-SECRET_KEY = 'mysecretsecurekeyforflaskxd!!!'
+SECRET_KEY = 'wapSECRETkey4media@WAYsPa'

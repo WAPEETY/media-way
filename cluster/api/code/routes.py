@@ -4,16 +4,43 @@ from app import app, db
 from flask import abort, jsonify, request, g
 import models
 from datetime import datetime
-
+import jwt
 
 
 @app.route('/login', methods=['POST'])
 def login():
-    print(dir(g))
-    return jsonify({
-        'error': 'Not implemented',
-        'token': '',
-    }), 501
+    error = None
+    data = None
+    try:
+        form = request.get_json(force=True)
+        user = models.Admin.query.filter(
+            models.Admin.username == form.get('username', None)
+        ).first()
+
+        if user == None:
+            error = 'User not found'
+
+        elif user.password == form.get('password', None):
+            data = jwt.encode({'id': user.id, 'level': user.level}, app.config['SECRET_KEY'], algorithm='HS256')
+            risposta = jsonify({
+                'error': None,
+                'data': data
+            })
+            risposta.set_cookie('token', data)
+            return risposta
+
+        else:
+            error = 'Authentification Failed'
+
+    except Exception as e:
+        data = None
+        error = str(e)
+
+    finally:
+        return jsonify({
+            'error': error,
+            'data': data
+        })
 
 
 @app.route('/event/all', methods=['GET', 'POST'])

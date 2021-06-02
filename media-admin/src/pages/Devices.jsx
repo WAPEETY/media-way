@@ -2,6 +2,8 @@ import Sidebar from '../components/sidebar'
 import DeviceCard from '../components/device_card'
 import AddDeviceModal from '../components/modals/AddDevice'
 import {useState, useEffect} from 'react'
+import Cookies from "js-cookie"
+import {Redirect} from "react-router-dom"
 
 export default function Devices() {
 
@@ -17,6 +19,10 @@ export default function Devices() {
 
 
     useEffect(()=>fetchDevices(), [])
+
+    if(Cookies.get("token") == null){
+        return <Redirect to="/login" />
+    }
 
     return (
         <main className="h-screen overflow-x-hidden flex flex-col sm:py-12" style={{"backgroundImage":"url(login_bg.jpg)"}}>

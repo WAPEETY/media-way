@@ -1,9 +1,12 @@
 import Sidebar from '../components/sidebar'
 import UserCard from '../components/user_card'
 import {useState, useEffect} from 'react'
+import Cookies from "js-cookie"
+import {Redirect} from "react-router-dom"
 
 export default function Users() {
     const [users, setUsers]=useState([]);
+    
     
     async function fetchUsers(){
         fetch("http://api.mediaway.com:8080/user/all")
@@ -20,6 +23,10 @@ export default function Users() {
     }
 
     useEffect(()=>fetchUsers(), [])
+
+    if(Cookies.get("token") == null){
+        return <Redirect to="/login" />
+    }
 
     return (
         <main className="h-screen overflow-x-hidden flex flex-col sm:py-12" style={{"backgroundImage":"url(login_bg.jpg)"}}>

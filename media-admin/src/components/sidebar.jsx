@@ -95,7 +95,7 @@ export default function sidebar(){
                     </div>
                 </div>
                 <div className="mb-4">
-                    <a href="#">
+                    <a href="/logout">
                         <span>
                             <svg
                               className="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-red-500"
