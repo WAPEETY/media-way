@@ -94,6 +94,18 @@ def create_event():
             'error': error,
         }), status
 
+@app.route('/admin/<int:id>/read', methods=['GET', 'POST'])
+def get_admin(id):
+    admin = models.Admin.query.get(id)
+    if admin is None:
+        return jsonify({
+            'error': 'Not Found',
+            'event': {},
+        }), 404
+    return jsonify({
+        'error': None,
+        'level': admin.toObject(),
+    }), 200
 
 @app.route('/event/<int:id>/read', methods=['GET', 'POST'])
 def get_event_data(id):
@@ -241,15 +253,6 @@ def update_device_data():
     return jsonify({
         'error': 'Not implemented',
     }), 501
-
-
-@app.route('/device/<int:id>/delete')
-def delete_device():
-    return jsonify({
-        'error': 'Not implemented',
-    }), 501
-
-
 
 @app.route('/user/all')
 def send_users():

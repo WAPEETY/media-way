@@ -22,7 +22,17 @@ class Admin(Base):
     phone = db.Column(db.String(16), nullable=False)
     password = db.Column(db.String(256), nullable=False)
     level = db.Column(db.Integer, nullable=False, default=0)
-
+    def toObject(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'surname': self.surname,
+            'username': self.username,
+            'email': self.email,
+            'phone': self.phone,
+            'password': self.password,
+            'level': self.level,
+        }
 
 class Log(Base):
     __tablename__ = 'logs'

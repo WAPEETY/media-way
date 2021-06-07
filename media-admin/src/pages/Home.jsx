@@ -11,6 +11,12 @@ export default function Home() {
     const [newUrl, setNewUrl]=useState(null)
     const [modalStatus, setModal]=useState(false);
 
+    async function getUser(){
+        fetch("http://api.mediaway.com:8080/event/all")
+            .then(data=>data.json())
+            .then()
+    }
+
     async function fetchEvents(){
         fetch("http://api.mediaway.com:8080/event/all")
             .then(data=>data.json())
