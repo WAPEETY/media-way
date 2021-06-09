@@ -1,3 +1,5 @@
+import hashlib
+
 from app import db
 from sqlalchemy.dialects.mysql import BIGINT
 
@@ -22,6 +24,25 @@ class Admin(Base):
     phone = db.Column(db.String(16), nullable=False)
     password = db.Column(db.String(256), nullable=False)
     level = db.Column(db.Integer, nullable=False, default=0)
+
+    @staticmethod
+    def autenticate(username, password):
+        
+        user = Admin.query.filter(
+            Admin.username == username
+        ).first()
+
+        if user == None:
+            raise Exception('User not found')
+        
+        phash = hashlib.sha512( str( password ).encode("utf-8") ).hexdigest()
+        
+        return user if phash == user.password else None
+
+    @staticmethod
+    def register(username, password):
+        return None
+
     def toObject(self):
         return {
             'id': self.id,
@@ -30,9 +51,9 @@ class Admin(Base):
             'username': self.username,
             'email': self.email,
             'phone': self.phone,
-            'password': self.password,
             'level': self.level,
         }
+
 
 class Log(Base):
     __tablename__ = 'logs'

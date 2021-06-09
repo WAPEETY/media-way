@@ -5,8 +5,8 @@ import {useState, useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
+
 export default function Home() {
-    
     const [eventi, setEventi]=useState([]);
     const [newUrl, setNewUrl]=useState(null)
     const [modalStatus, setModal]=useState(false);

@@ -13,14 +13,9 @@ def login():
     data = None
     try:
         form = request.get_json(force=True)
-        user = models.Admin.query.filter(
-            models.Admin.username == form.get('username', None)
-        ).first()
-
-        if user == None:
-            error = 'User not found'
-
-        elif user.password == form.get('password', None):
+        
+        user = models.Admin.autenticate(form.get('username', None), form.get('password', None))
+        if user != None:
             data = jwt.encode({'id': user.id, 'level': user.level}, app.config['SECRET_KEY'], algorithm='HS256')
             risposta = jsonify({
                 'error': None,
@@ -29,8 +24,7 @@ def login():
             risposta.set_cookie('token', data)
             return risposta
 
-        else:
-            error = 'Authentification Failed'
+        raise Exception('Authentication failed')
 
     except Exception as e:
         data = None
@@ -105,6 +99,17 @@ def get_admin(id):
     return jsonify({
         'error': None,
         'level': admin.toObject(),
+    }), 200
+
+@app.route('/admin/all', methods=['GET', 'POST'])
+def get_admin_list():
+    admins = []
+    for x in models.Admin.query.all():
+        admins.append(x.toObject())
+
+    return jsonify({
+        'error': None,
+        'admins': admins,
     }), 200
 
 @app.route('/event/<int:id>/read', methods=['GET', 'POST'])

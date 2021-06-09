@@ -8,30 +8,19 @@ export default function sidebar(){
                         <li className="mb-6">
                                 <a href="/">
                                     <span>
-                                        <svg
-                                            className="fill-current h-6 w-6 mx-auto text-gray-900 hover:text-green-500"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            
-  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-
-
-                                        </svg>
+                                    <svg className="fill-current h-6 w-6 mx-auto text-gray-900 hover:text-green-500" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22L12 3Z" />
+</svg>
                                     </span>
                                 </a>
                             </li>
                             <li className="mb-6">
                                 <a href="/users">
                                     <span>
-                                        <svg
-                                            className="fill-current h-5 w-5 mx-auto text-gray-900 hover:text-green-500"
-                                            viewBox="0 0 512 512"
-                                        >
-                                            <path d="m226 232c-63.963 0-116-52.037-116-116s52.037-116 116-116 116 52.037 116 116-52.037 116-116 116z"/>
-                                            <path d="m271 317c0-25.68 7.21-49.707 19.708-70.167-19.515 9.693-41.48 15.167-64.708 15.167-30.128 0-58.152-9.174-81.429-24.874-28.782 11.157-55.186 28.291-77.669 50.774-42.498 42.497-65.902 98.999-65.902 159.099v50.001c0 8.284 6.716 15 15 15h420c8.284 0 15-6.716 15-15v-50.001c0-.901-.025-1.805-.036-2.708-14.072 4.986-29.205 7.709-44.964 7.709-74.439 0-135-60.561-135-135z"/>
-                                            <path d="m406 212c-57.897 0-105 47.103-105 105s47.103 105 105 105 105-47.103 105-105-47.103-105-105-105zm30 120h-15v15c0 8.284-6.716 15-15 15s-15-6.716-15-15v-15h-15c-8.284 0-15-6.716-15-15s6.716-15 15-15h15v-15c0-8.284 6.716-15 15-15s15 6.716 15 15v15h15c8.284 0 15 6.716 15 15s-6.716 15-15 15z"/>
-
-                                        </svg>
+                                        <svg viewBox="0 0 24 24"
+                                            className="fill-current h-6 w-6 mx-auto text-gray-900 hover:text-green-500">
+                                            <path fill="currentColor" d="M21.1,12.5L22.5,13.91L15.97,20.5L12.5,17L13.9,15.59L15.97,17.67L21.1,12.5M11,4A4,4 0 0,1 15,8A4,4 0 0,1 11,12A4,4 0 0,1 7,8A4,4 0 0,1 11,4M11,6A2,2 0 0,0 9,8A2,2 0 0,0 11,10A2,2 0 0,0 13,8A2,2 0 0,0 11,6M11,13C11.68,13 12.5,13.09 13.41,13.26L11.74,14.93L11,14.9C8.03,14.9 4.9,16.36 4.9,17V18.1H11.1L13,20H3V17C3,14.34 8.33,13 11,13Z" />
+                                        </svg>                                    
                                     </span>
                                 </a>
                             </li>
@@ -50,7 +39,7 @@ export default function sidebar(){
                                     </span>
                                 </a>
                             </li>
-                            <li>
+                            <li className="mb-6">
                                 <a href="events_calendar">
                                     <span>
                                         <svg
@@ -87,6 +76,17 @@ export default function sidebar(){
 			                                <circle cx="212" cy="384" r="20"/>
 			                                <circle cx="212" cy="210" r="20"/>
 
+                                        </svg>
+                                    </span>
+                                </a>
+                            </li>
+                            <li className="">
+                                <a href="/admin">
+                                    <span>
+                                        <svg 
+                                            viewBox="0 0 24 24"
+                                            className="fill-current h-5 w-5 text-gray-900 mx-auto hover:text-green-500">
+                                            <path fill="currentColor" d="M15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4M15,5.9C16.16,5.9 17.1,6.84 17.1,8C17.1,9.16 16.16,10.1 15,10.1A2.1,2.1 0 0,1 12.9,8A2.1,2.1 0 0,1 15,5.9M4,7V10H1V12H4V15H6V12H9V10H6V7H4M15,13C12.33,13 7,14.33 7,17V20H23V17C23,14.33 17.67,13 15,13M15,14.9C17.97,14.9 21.1,16.36 21.1,17V18.1H8.9V17C8.9,16.36 12,14.9 15,14.9Z" />
                                         </svg>
                                     </span>
                                 </a>

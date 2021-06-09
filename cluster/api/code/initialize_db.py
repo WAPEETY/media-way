@@ -5,17 +5,20 @@ from app import app, db
 from models import *
 from os import remove
 import datetime
+import hashlib
 
 
 #remove('app.db')
+db.drop_app()
 db.create_all()
+raise Exception('wapeety is stoopid')
 
 # Utenti
 user_admin = Admin(
     name='Mario',
     surname='Rossi',
     email='mario.rossi@mediaway.it',
-    password='password',
+    password=hashlib.sha512('password'.encode('utf-8')).hexdigest(),
     username='admin',
     phone='+39 3275378003',
     level=3,
