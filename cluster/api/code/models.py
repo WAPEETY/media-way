@@ -39,10 +39,6 @@ class Admin(Base):
         
         return user if phash == user.password else None
 
-    @staticmethod
-    def register(username, password):
-        return None
-
     def toObject(self):
         return {
             'id': self.id,

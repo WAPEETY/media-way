@@ -5,6 +5,7 @@ from flask import abort, jsonify, request, g
 import models
 from datetime import datetime
 import jwt
+import hashlib
 
 
 @app.route('/login', methods=['POST'])
@@ -51,7 +52,8 @@ def send_events():
 
 @app.route('/event/create', methods=['POST'])
 def create_event():
-    error = "none"
+    error = None
+    status= "undefined"
     try:
         args = request.get_json(force=True)
         name = args.get('name', None)
@@ -112,6 +114,64 @@ def get_admin_list():
         'admins': admins,
     }), 200
 
+@app.route('/admin/<int:id>/delete', methods=['GET', 'POST'])
+def delete_admin(id):
+    try:
+        admin = models.Admin.query.get(id)
+        db.session.delete(admin)
+        db.session.commit()
+        return jsonify({
+            'error': None,
+        }), 200
+    
+    except Exception as e:
+        return jsonify({
+            'error': "Error while deleting admin"
+        }), 404
+
+
+@app.route('/admin/create', methods=['POST'])
+def create_admin():
+    error = None
+    status = 200
+    try:
+        args = request.get_json(force=True)
+        name = args.get('name', None)
+        surname = args.get('surname', None)
+        email = args.get('email', None)
+        phone = args.get('phone', None)
+        username = args.get('username', None)
+        level = args.get('level', None)
+        password = args.get('password', None)
+        
+        if None in [name, surname, email, username, level, password]:
+            raise Exception('Missing data')
+        
+        passwordHash = hashlib.sha512( str( password ).encode("utf-8") ).hexdigest()
+
+        foobar = models.Admin(
+            name = name,
+            surname = surname,
+            email = email,
+            phone = phone,
+            username = username,
+            level = level,
+            password = passwordHash
+        )
+
+        db.session.add(foobar)
+        db.session.commit()
+    
+    except Exception as e:
+        error = str(e)
+        status = 200
+
+    finally:
+        return jsonify({
+            'error': error,
+        }), status
+
+
 @app.route('/event/<int:id>/read', methods=['GET', 'POST'])
 def get_event_data(id):
     event = models.Event.query.get(id)
@@ -136,9 +196,18 @@ def update_event_data(id):
 
 @app.route('/event/<int:id>/delete', methods=['GET', 'POST'])
 def delete_event_data(id):
-    return jsonify({
-        'error': 'Not implemented',
-    }), 501
+    try:
+        event = models.Event.query.get(id)
+        db.session.delete(event)
+        db.session.commit()
+        return jsonify({
+            'error': None,
+        }), 200
+    
+    except Exception as e:
+        return jsonify({
+            'error': "Error while deleting event"
+        }), 404
 
 
 @app.route('/event/<int:id>/device/all', methods=['GET', 'POST'])

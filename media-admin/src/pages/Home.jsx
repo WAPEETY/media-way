@@ -12,7 +12,7 @@ export default function Home() {
     const [modalStatus, setModal]=useState(false);
 
     async function getUser(){
-        fetch("http://api.mediaway.com:8080/event/all")
+        fetch("http://api.mediaway.com:8080/user/all")
             .then(data=>data.json())
             .then()
     }
@@ -33,7 +33,6 @@ export default function Home() {
     }
 
     useEffect(_=>fetchEvents(), [])
-    
 
     if(newUrl !== null){
         return(
@@ -55,7 +54,7 @@ export default function Home() {
                 <div className="ml-10 md:ml-32 md:mr-4 grid grid-cols-1 md:grid-cols-2">
                 {eventi.map(a => {
                     return ( 
-                        <div><EventCard eventName={a.name} eventDescription={a.description} setNewUrl={setNewUrl} id={a.id}/></div>
+                        <div><EventCard onDelete={fetchEvents} eventId={a.id} eventName={a.name} eventDescription={a.description} setNewUrl={setNewUrl} id={a.id}/></div>
                     )
                 })}
                     <div className="lg:m-4 inline-block align-middle shadow-md hover:shadow-lg hover:bg-gray-100 rounded-lg bg-white my-12 mx-8 cursor-pointer">
