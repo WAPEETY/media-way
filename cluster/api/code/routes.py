@@ -12,6 +12,7 @@ import hashlib
 def login():
     error = None
     data = None
+    status = 200
     try:
         form = request.get_json(force=True)
         
@@ -30,12 +31,12 @@ def login():
     except Exception as e:
         data = None
         error = str(e)
-
+        status = 401
     finally:
         return jsonify({
             'error': error,
             'data': data
-        })
+        }), status
 
 
 @app.route('/event/all', methods=['GET', 'POST'])
@@ -330,14 +331,20 @@ def update_device_data():
 
 @app.route('/user/all')
 def send_users():
+    error = None
+    status = 200
     events = []
-    for x in models.Agency.query.all():
-        events.append(x.toObject())
-
-    return jsonify({
-        'error': None,
-        'agencies': events,
-    }), 200
+    try:
+        for x in models.Agency.query.all():
+            events.append(x.toObject())
+    except Exception as e:
+        error = str(e)
+        status = 403
+    finally:
+        return jsonify({
+            'error': error,
+            'agencies': events,
+        }), status
 
 
 @app.route('/user/<int:id>')
@@ -353,6 +360,7 @@ def activate_user_by(id):
     error = None
     status = 200
     try:
+        check_permissions(1)
         foobar = models.Agency.query.get(id)
         if foobar is None:
             raise Exception('Utente non esiste')
@@ -362,7 +370,10 @@ def activate_user_by(id):
     
     except Exception as e:
         error = str(e)
-        status = 400
+        if error == "Utente non esiste":
+            status = 400
+        else:
+            status = 403
 
     finally:
         return jsonify({
@@ -373,10 +384,21 @@ def activate_user_by(id):
 @app.route('/brand/all')
 def get_all_brands():
     data = []
-    for x in models.Brand.query.all():
-        data.append(x.toObject())
-    
-    return jsonify({
-        'error': None,
-        'brands': data
-    }), 200
+    error = None
+    status = 200
+    try:
+        check_permissions(1)
+        for x in models.Brand.query.all():
+            data.append(x.toObject())
+    except Exception as e:
+        error = str(e)
+        status = 403
+    finally:    
+        return jsonify({
+            'error': error,
+            'brands': data
+        }), status
+
+def check_permissions(level):
+    if g.data is None or g.data.get("level", 0) < level:
+        raise Exception("forbidden")
