@@ -165,7 +165,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css
   </form>
   <?php
     if(isset($_SESSION['msg_type'])){
-      echo($_SESSION['msg_txt']);
+      //echo($_SESSION['msg_txt']);
     }
   ?>
 </div>

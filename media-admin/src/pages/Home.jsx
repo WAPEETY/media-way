@@ -49,7 +49,7 @@ export default function Home() {
             <div className="row-span-1 h-80 absolute mt-8 -ml-3">
                     <Sidebar />
             </div>
-                {modalStatus ? <AddEventModal closer={_ => {setModal(false);}} /> : null}
+                {modalStatus ? <AddEventModal closer={_ => {setModal(false);}} onCreate={fetchEvents} /> : null}
             <div>
                 <div className="ml-10 md:ml-32 md:mr-4 grid grid-cols-1 md:grid-cols-2">
                 {eventi.map(a => {

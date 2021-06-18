@@ -360,7 +360,7 @@ def activate_user_by(id):
     error = None
     status = 200
     try:
-        check_permissions(1)
+        #check_permissions(1)
         foobar = models.Agency.query.get(id)
         if foobar is None:
             raise Exception('Utente non esiste')
@@ -401,4 +401,4 @@ def get_all_brands():
 
 def check_permissions(level):
     if g.data is None or g.data.get("level", 0) < level:
-        raise Exception("forbidden")
+        raise Exception("forbidden, your level is: " . g.data.get("level"))

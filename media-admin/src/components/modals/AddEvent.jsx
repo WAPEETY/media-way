@@ -24,7 +24,7 @@ export default function AddEventModal(props) {
                 }
 
                 props.closer()
-            })
+            }).then(r=>props.onCreate())
     }
 
 
