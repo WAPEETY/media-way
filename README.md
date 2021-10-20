@@ -1,7 +1,7 @@
 # media-way
 A simple client server application to manage reservations about short range frequencies for microphones or wireless cameras in big events brought by TV broadcasters
 
-**WARNING**: I have no time to finish/mantain this project
+**WARNING**: I have no time to finish/mantain this project <br>
 **WARNING**: **DO NOT COPY**, there are a lot of vulnerabilities
 
 # HOW TO MAKE IT RUN
